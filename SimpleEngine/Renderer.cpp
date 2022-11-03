@@ -53,12 +53,6 @@ void Renderer::draw()
 
 void Renderer::endDraw()
 {
-	TTF_Font* pixelFont = TTF_OpenFont("Sans.ttf", 24);
-	SDL_Surface* surfaceMessage = TTF_RenderText_Solid(pixelFont, "test", SDL_Color{ 255, 255, 255 });
-	SDL_Texture* message = SDL_CreateTextureFromSurface(SDLRenderer, surfaceMessage);
-	SDL_Rect messageRect = SDL_Rect{ 50, 50, 100, 100 };
-	SDL_RenderCopy(SDLRenderer, message, NULL, &messageRect);
-
 	SDL_RenderPresent(SDLRenderer);
 }
 
