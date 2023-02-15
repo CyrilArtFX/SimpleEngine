@@ -2,6 +2,7 @@
 #include "Timer.h"
 #include "Player.h"
 #include "RaceTimer.h"
+#include <iostream>
 
 bool Game::initialize()
 {
@@ -17,6 +18,7 @@ void Game::load()
 	Assets::loadTexture(renderer, "RacingGame/Obstacle.png", "obstacle");
 	Assets::loadTexture(renderer, "RacingGame/background.png", "background");
 	Assets::loadShader("Shaders/Basic.vert", "Shaders/Basic.frag", "", "", "", "Basic");
+	Assets::loadShader("Shaders/Transform.vert", "Shaders/Basic.frag", "", "", "", "Transform");
 
 	//  load actors
     player = new Player();
@@ -24,21 +26,21 @@ void Game::load()
 	Vector2 playerPos = player->getPosition();
 	renderer.setCamPos(Vector2(playerPos.x - WINDOW_WIDTH / 2, playerPos.y - WINDOW_HEIGHT / 2));
 
-	auto background = new Actor();
-	auto sc = new SpriteComponent(background, Assets::getTexture("background"), 10);
+	/*auto background = new Actor();
+	auto sc = new SpriteComponent(background, Assets::getTexture("background"), 10);*/
 
-	new RaceTimer();
+	//new RaceTimer();
 
 
 	//  obstacles
-	new Obstacle(Vector2{ 200.0f, -560.0f }, Vector2{ 200.0f, -440.0f });
+	new Obstacle(Vector2{200.0f, -560.0f}, Vector2{200.0f, -440.0f});
 	new Obstacle(Vector2{ 960.0f, -240.0f }, Vector2{ 1080.0f, -360.0f });
 	new Obstacle(Vector2{ 600.0f, 440.0f }, Vector2{ 600.0f, 560.0f });
 	new Obstacle(Vector2{ -300.0f, 40.0f }, Vector2{ -300.0f, 160.0f });
 	new Obstacle(Vector2{ -640.0f, -300.0f }, Vector2{ -520.0f, -300.0f });
 
 	//  road colliders
-	new RoadCollider(Rectangle{ -670.0f, -575.0f, 1140.0f, 140.0f });
+    new RoadCollider(Rectangle{-670.0f, -575.0f, 1140.0f, 140.0f});
 	new RoadCollider(Rectangle{ 330.0f, -375.0f, 740.0f, 140.0f });
 	new RoadCollider(Rectangle{ -70.0f, 425.0f, 1140.0f, 140.0f });
 	new RoadCollider(Rectangle{ -1070.0f, 25.0f, 1140.0f, 140.0f });
@@ -124,9 +126,10 @@ void Game::update(float dt)
 	}
 	isUpdatingActors = false;
 
-	//  move penfing actors to actors
+	//  move pending actors to actors
 	for (auto pendingActor : pendingActors)
 	{
+		pendingActor->computeWorldTransform();
 		actors.emplace_back(pendingActor);
 	}
 	pendingActors.clear();

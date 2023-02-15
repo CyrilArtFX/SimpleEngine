@@ -2,6 +2,7 @@
 #include <string>
 #include "IRenderer.h"
 #include "RendererSDL.h"
+#include "RendererOGL.h"
 using std::string;
 
 class Texture
@@ -12,6 +13,8 @@ public:
 
 	void unload();
 	bool loadSDL(RendererSDL& rendererP, const string& filenameP);
+	bool loadOGL(RendererOGL& rendererP, const string& filenameP);
+
 	SDL_Texture* toSDLTexture() const { return SDLTexture; }
 	void updateInfo(int& widthOut, int& heightOut);
 

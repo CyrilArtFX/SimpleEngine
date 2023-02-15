@@ -3,6 +3,7 @@
 #include "Game.h"
 #include "Component.h"
 #include "Maths.h"
+#include <iostream>
 
 Actor::Actor() : game(Game::instance())
 {
@@ -22,24 +23,29 @@ Actor::~Actor()
 void Actor::setPosition(Vector2 positionP)
 {
 	position = positionP;
+	mustRecomputeWorldTransform = true;
 }
 
 void Actor::setScale(float scaleP)
 {
 	scale = scaleP;
+	mustRecomputeWorldTransform = true;
 }
 
 void Actor::setRotation(float rotationP)
 {
 	rotation = rotationP;
+	mustRecomputeWorldTransform = true;
 }
 
 void Actor::update(float dt)
 {
 	if (state == Actor::ActorState::Active)
 	{
+		computeWorldTransform();
 		updateComponents(dt);
 		updateActor(dt);
+		computeWorldTransform();
 	}
 }
 
@@ -82,7 +88,7 @@ void Actor::removeComponent(Component* component)
 
 Vector2 Actor::getForward() const
 {
-	return Vector2(Maths::cos(rotation), -Maths::sin(rotation));
+	return Vector2(Maths::cos(rotation), Maths::sin(rotation));
 }
 
 void Actor::processInput(const Uint8* keyState)
@@ -99,4 +105,24 @@ void Actor::processInput(const Uint8* keyState)
 
 void Actor::actorInput(const Uint8* keyState)
 {
+}
+
+void Actor::computeWorldTransform()
+{
+	if (mustRecomputeWorldTransform)
+	{
+		Vector2 camPos = game.getRenderer().getCamPos();
+
+		mustRecomputeWorldTransform = false;
+		worldTransform = Matrix4::createScale(scale);
+		worldTransform *= Matrix4::createRotationZ(rotation);
+		worldTransform *= Matrix4::createTranslation(Vector3(position.x - camPos.x, position.y - camPos.y, 0.0f));
+		//std::cout << "Player world transform matrix :\n" << worldTransform.toString() << "\n";
+
+
+		for (auto component : components)
+		{
+			component->onUpdateWorldTransform();
+		}
+	}
 }

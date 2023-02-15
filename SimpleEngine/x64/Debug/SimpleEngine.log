@@ -1,15 +1,4 @@
 ﻿  Actor.cpp
-  Assets.cpp
   Game.cpp
-  InputMoveComponent.cpp
-  Main.cpp
-  Obstacle.cpp
-  Player.cpp
-  RaceTimer.cpp
-  RendererOGL.cpp
-  RendererSDL.cpp
-  RoadCollider.cpp
-  Shader.cpp
-  SpriteComponent.cpp
   Génération de code en cours...
   SimpleEngine.vcxproj -> D:\GAME3_CROZAT_Cyril\SimpleEngine\x64\Debug\SimpleEngine.exe

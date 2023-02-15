@@ -46,6 +46,7 @@ void InputMoveComponent::update(float dt)
 	if (!Maths::nearZero(forwardSpeed))
 	{
 		Vector2 newPosition = owner.getPosition() + owner.getForward() * forwardSpeed * dt;
+		owner.setPosition(newPosition);
 
 		auto roadColliders = owner.getGame().getRoadColliders();
 		for (auto roadCollider : roadColliders)

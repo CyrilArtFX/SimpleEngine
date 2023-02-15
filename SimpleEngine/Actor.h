@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include "Vector2.h"
+#include "Matrix4.h"
 #include "SDL_stdinc.h"
 using std::vector;
 
@@ -28,10 +29,12 @@ public:
 	const float getScale() const { return scale; }
 	const float getRotation() const { return rotation; }
 	Vector2 getForward() const;
+	const Matrix4& getWorldTransform() const { return worldTransform; }
 
 	void setPosition(Vector2 positionP);
 	void setScale(float scaleP);
 	void setRotation(float rotationP);
+	void computeWorldTransform();
 
 	void update(float dt);
 	void updateComponents(float dt);
@@ -48,6 +51,8 @@ private:
 	Vector2 position{ Vector2::zero };
 	float scale{ 1.0f };
 	float rotation{ 0.0f }; //  in radians
+	Matrix4 worldTransform;
+	bool mustRecomputeWorldTransform{ true };
 
 	vector<Component*> components;
 };

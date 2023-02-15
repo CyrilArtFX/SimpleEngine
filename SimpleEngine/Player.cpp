@@ -11,5 +11,5 @@ Player::Player() : Actor()
 	collision->setRadius(20.0f);
 	InputMoveComponent* mc = new InputMoveComponent(this, collision);
 	mc->setMaxForwardSpeed(300.0f);
-	mc->setMaxAngularSpeed(Maths::twoPi);
+	mc->setMaxAngularSpeed(Maths::pi);
 }

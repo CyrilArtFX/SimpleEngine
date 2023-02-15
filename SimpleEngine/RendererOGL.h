@@ -19,6 +19,7 @@ public:
 	void endDraw();
 
 	void setCamPos(Vector2 camPosP);
+	Vector2 getCamPos() const { return camPos; }
 
 	void addSprite(class SpriteComponent* sprite);
 	void removeSprite(class SpriteComponent* sprite);
@@ -34,6 +35,7 @@ private:
 	Shader* shader;
 	SDL_GLContext context;
 	std::vector<class SpriteComponent*> sprites;
+	Matrix4 viewProj;
 	Vector2 camPos{ Vector2::zero };
 };
 

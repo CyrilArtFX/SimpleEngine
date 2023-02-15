@@ -8,6 +8,7 @@
 #include <fstream>
 
 #include "Vector2.h"
+#include "Matrix4.h"
 
 // General purpose shader object. Compiles from file, generates
 // compile/link-time error messages and hosts several utility 
@@ -41,14 +42,13 @@ public:
 	void setInteger(const GLchar* name, GLint value);
 	void setVector2f(const GLchar* name, GLfloat x, GLfloat y);
 	void setVector2f(const GLchar* name, const Vector2& value);
-
-	/*
 	void setVector3f(const GLchar* name, GLfloat x, GLfloat y, GLfloat z);
 	void setVector3f(const GLchar* name, const Vector3& value);
+	/*
 	void setVector4f(const GLchar* name, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
 	void setVector4f(const GLchar* name, const Vector4& value);
-	void setMatrix4(const GLchar* name, const Matrix4& matrix);
 	*/
+	void setMatrix4(const GLchar* name, const Matrix4& matrix);
 
 private:
 	GLuint vs;
