@@ -1,7 +1,8 @@
 #pragma once
 #include <vector>
 #include "Window.h"
-#include "Renderer.h"
+#include "RendererSDL.h"
+#include "RendererOGL.h"
 #include "Vector2.h"
 #include "Assets.h"
 #include "SpriteComponent.h"
@@ -38,7 +39,8 @@ public:
 
 	void addActor(Actor* actor);
 	void removeActor(Actor* actor);
-	Renderer& getRenderer() { return renderer; }
+	//RendererSDL& getRenderer() { return renderer; }
+	RendererOGL& getRenderer() { return renderer; }
 
 	vector<Obstacle*>& getObstacles();
 	void addObstacle(Obstacle* obstacle);
@@ -56,7 +58,8 @@ private:
 	void render();
 
 	Window window;
-	Renderer renderer;
+	//RendererSDL renderer;
+	RendererOGL renderer;
 	bool isRunning{ true };
 
 	Player* player{ nullptr };

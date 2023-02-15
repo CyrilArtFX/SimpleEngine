@@ -1,5 +1,6 @@
 #include "Window.h"
 #include "Log.h"
+#include <GL/glew.h>
 
 bool Window::initialize()
 {
@@ -10,7 +11,7 @@ bool Window::initialize()
 		return false;
 	}
 
-	SDLWindow = SDL_CreateWindow("SpaceShip", 100, 100, width, height, 0);
+	SDLWindow = SDL_CreateWindow("Moteur 3D incroyable avec Open GL c'est fou", 100, 100, width, height, SDL_WINDOW_OPENGL);
 	if (!SDLWindow)
 	{
 		Log::error(LogCategory::System, "Failed to create window");

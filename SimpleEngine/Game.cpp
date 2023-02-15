@@ -16,6 +16,7 @@ void Game::load()
 	Assets::loadTexture(renderer, "RacingGame/Car.png", "car");
 	Assets::loadTexture(renderer, "RacingGame/Obstacle.png", "obstacle");
 	Assets::loadTexture(renderer, "RacingGame/background.png", "background");
+	Assets::loadShader("Shaders/Basic.vert", "Shaders/Basic.frag", "", "", "", "Basic");
 
 	//  load actors
     player = new Player();
