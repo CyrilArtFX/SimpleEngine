@@ -19,6 +19,7 @@ void Game::load()
 	Assets::loadTexture(renderer, "RacingGame/background.png", "background");
 	Assets::loadShader("Shaders/Basic.vert", "Shaders/Basic.frag", "", "", "", "Basic");
 	Assets::loadShader("Shaders/Transform.vert", "Shaders/Basic.frag", "", "", "", "Transform");
+	Assets::loadShader("Shaders/Sprite.vert", "Shaders/Sprite.frag", "", "", "", "Sprite");
 
 	//  load actors
     player = new Player();
@@ -26,8 +27,9 @@ void Game::load()
 	Vector2 playerPos = player->getPosition();
 	renderer.setCamPos(Vector2(playerPos.x - WINDOW_WIDTH / 2, playerPos.y - WINDOW_HEIGHT / 2));
 
-	/*auto background = new Actor();
-	auto sc = new SpriteComponent(background, Assets::getTexture("background"), 10);*/
+	auto background = new Actor();
+	auto sc = new SpriteComponent(background, Assets::getTexture("background"), 10);
+	background->forceRecomputeWorldTransform = true;
 
 	//new RaceTimer();
 

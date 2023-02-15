@@ -109,7 +109,7 @@ void Actor::actorInput(const Uint8* keyState)
 
 void Actor::computeWorldTransform()
 {
-	if (mustRecomputeWorldTransform)
+	if (mustRecomputeWorldTransform || forceRecomputeWorldTransform)
 	{
 		Vector2 camPos = game.getRenderer().getCamPos();
 

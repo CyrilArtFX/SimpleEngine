@@ -53,7 +53,7 @@ bool RendererOGL::initialize(Window& windowP)
 	}
 
 	vertexArray = new VertexArray(vertices, 4, indices, 6);
-	shader = &Assets::getShader("Transform");
+	shader = &Assets::getShader("Sprite");
 	return true;
 }
 
@@ -85,6 +85,7 @@ void RendererOGL::drawSprite(const Actor& actor, const Texture& tex, Rectangle s
 	Matrix4 pixelTranslation = Matrix4::createTranslation(Vector3(-WINDOW_WIDTH / 2 - origin.x, -WINDOW_HEIGHT / 2 - origin.y, 0.0f));
 	//std::cout << "Render Draw Sprite - Pixel Translation Matrix :\n" << pixelTranslation.toString() << "\n";
 	shader->setMatrix4("uWorldTransform", world * pixelTranslation);
+	tex.setActive();
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
 }
 

@@ -17,11 +17,13 @@ public:
 
 	SDL_Texture* toSDLTexture() const { return SDLTexture; }
 	void updateInfo(int& widthOut, int& heightOut);
+	void setActive() const;
 
 	int getWidth() const { return width; }
 	int getHeight() const { return height; }
 
 private:
+	unsigned int textureID;
 	string filename{ "" };
 	SDL_Texture* SDLTexture{ nullptr };
 	int width{ 0 };

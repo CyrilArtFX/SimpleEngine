@@ -199,5 +199,7 @@
     <None Include="Shaders\Transform.vert">
       <Filter>Fichiers sources</Filter>
     </None>
+    <None Include="Shaders\Sprite.vert" />
+    <None Include="Shaders\Sprite.frag" />
   </ItemGroup>
 </Project>

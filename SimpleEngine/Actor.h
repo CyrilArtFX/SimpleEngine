@@ -45,6 +45,8 @@ public:
 	void processInput(const Uint8* keyState);
 	virtual void actorInput(const Uint8* keyState);
 
+	bool forceRecomputeWorldTransform{ false };
+
 private:
 	Game& game;
 	ActorState state{ ActorState::Active };
