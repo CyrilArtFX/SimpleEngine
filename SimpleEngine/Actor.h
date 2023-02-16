@@ -46,8 +46,8 @@ public:
 	void addComponent(Component* component);
 	void removeComponent(Component* component);
 
-	void processInput(const Uint8* keyState);
-	virtual void actorInput(const Uint8* keyState);
+	void processInput(const struct InputState& inputState);
+	virtual void actorInput(const struct InputState& inputState);
 
 	void logWorldTransformMatrix();
 

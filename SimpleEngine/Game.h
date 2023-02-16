@@ -6,6 +6,7 @@
 #include "SpriteComponent.h"
 #include "Player.h"
 #include "Camera.h"
+#include "InputSystem.h"
 using std::vector;
 
 class Game
@@ -47,6 +48,7 @@ private:
 
 	Window window;
 	RendererOGL renderer;
+	InputSystem inputSystem;
 	bool isRunning{ true };
 	bool isUpdatingActors{ false };
 

@@ -13,24 +13,24 @@ public:
 	InputMoveComponent(const InputMoveComponent&) = delete;
 	InputMoveComponent& operator=(const InputMoveComponent&) = delete;
 
-	void processInput(const Uint8* keyState);
+	void processInput(const struct InputState& inputState);
 
 	void setMaxForwardSpeed(float maxForwardSpeedP);
 	void setMaxAngularSpeed(float maxAngularSpeedP);
 
-	void setForwardKey(int key);
-	void setBackKey(int key);
-	void setClockwiseKey(int key);
-	void setCounterClockwiseKey(int key);
+	void setForwardKey(SDL_Scancode key);
+	void setBackKey(SDL_Scancode key);
+	void setClockwiseKey(SDL_Scancode key);
+	void setCounterClockwiseKey(SDL_Scancode key);
 
 private:
 	float maxForwardSpeed{ 0.0f };
 	float maxAngularSpeed{ 0.0f };
 
-	int forwardKey{ SDL_SCANCODE_W };
-	int backKey{ SDL_SCANCODE_S };
-	int clockwiseKey{ SDL_SCANCODE_D };
-	int counterClockwiseKey{ SDL_SCANCODE_A };
+	SDL_Scancode forwardKey{ SDL_SCANCODE_W };
+	SDL_Scancode backKey{ SDL_SCANCODE_S };
+	SDL_Scancode clockwiseKey{ SDL_SCANCODE_D };
+	SDL_Scancode counterClockwiseKey{ SDL_SCANCODE_A };
 
 	CircleCollisionComponent* collision{ nullptr };
 };

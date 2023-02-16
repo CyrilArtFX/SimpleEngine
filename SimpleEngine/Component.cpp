@@ -1,5 +1,6 @@
 #include "Component.h"
 #include "Actor.h"
+#include "InputSystem.h"
 
 Component::Component(Actor* ownerP, int updateOrderP) : owner(*ownerP), updateOrder(updateOrderP)
 {
@@ -15,6 +16,6 @@ void Component::update(float dt)
 {
 }
 
-void Component::processInput(const Uint8* keyState)
+void Component::processInput(const InputState& inputState)
 {
 }

@@ -4,6 +4,7 @@
 #include "Component.h"
 #include "Maths.h"
 #include "Log.h"
+#include "InputSystem.h"
 
 Actor::Actor() : game(Game::instance())
 {
@@ -96,19 +97,19 @@ Vector3 Actor::getForward() const
 	return Vector3::transform(Vector3::unitX, rotation);
 }
 
-void Actor::processInput(const Uint8* keyState)
+void Actor::processInput(const InputState& inputState)
 {
 	if (state == ActorState::Active) 
 	{
 		for (auto component : components)
 		{
-			component->processInput(keyState);
+			component->processInput(inputState);
 		}
-		actorInput(keyState);
+		actorInput(inputState);
 	}
 }
 
-void Actor::actorInput(const Uint8* keyState)
+void Actor::actorInput(const InputState& inputState)
 {
 }
 
