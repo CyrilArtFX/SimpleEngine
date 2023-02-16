@@ -6,6 +6,7 @@
 #include "Sphere.h"
 #include "Plane.h"
 #include "FPSActor.h"
+#include "FollowActor.h"
 
 bool Game::initialize()
 {
@@ -47,6 +48,7 @@ void Game::load()
     player = new Player();
 
 	fps = new FPSActor();
+	follow = new FollowActor();
 
 	Cube* a = new Cube();
 	a->setPosition(Vector3(200.0f, 105.0f, 0.0f));
@@ -182,6 +184,15 @@ void Game::processInput()
 		isRunning = false;
 	}
 
+	if (input.keyboard.getKeyState(SDL_SCANCODE_1) == ButtonState::Pressed)
+	{
+		changeCamera(1);
+	}
+	else if (input.keyboard.getKeyState(SDL_SCANCODE_2) == ButtonState::Pressed)
+	{
+		changeCamera(2);
+	}
+
 	// Actor input
 	isUpdatingActors = true;
 	for (auto actor : actors)
@@ -260,4 +271,29 @@ void Game::render()
 	renderer.beginDraw();
 	renderer.draw();
 	renderer.endDraw();
+}
+
+void Game::changeCamera(int mode)
+{
+	// Disable everything
+	fps->setState(Actor::ActorState::Paused);
+	fps->setVisible(false);
+	crosshair->setVisible(false);
+	follow->setState(Actor::ActorState::Paused);
+	follow->setVisible(false);
+
+	// Enable the camera specified by the mode
+	switch (mode)
+	{
+	case 1:
+	default:
+		fps->setState(Actor::ActorState::Active);
+		fps->setVisible(true);
+		crosshair->setVisible(true);
+		break;
+	case 2:
+		follow->setState(Actor::ActorState::Active);
+		follow->setVisible(true);
+		break;
+	}
 }

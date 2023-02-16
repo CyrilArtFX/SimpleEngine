@@ -40,6 +40,8 @@ public:
 
 	Player* getPlayer() const { return player; }
 
+	void changeCamera(int mode);
+
 private:
 	void processInput();
 	void update(float dt);
@@ -51,10 +53,12 @@ private:
 	bool isRunning{ true };
 	bool isUpdatingActors{ false };
 
-	Player* player{ nullptr };
-	class FPSActor* fps{ nullptr };
-	class SpriteComponent* crosshair{ nullptr };
 	vector<Actor*> actors;
 	vector<Actor*> pendingActors;
+
+	Player* player{ nullptr };
+	class FPSActor* fps{ nullptr };
+	class FollowActor* follow{ nullptr };
+	class SpriteComponent* crosshair{ nullptr };
 };
 
