@@ -3,7 +3,7 @@
 #include "Game.h"
 #include "Component.h"
 #include "Maths.h"
-#include <iostream>
+#include "Log.h"
 
 Actor::Actor() : game(Game::instance())
 {
@@ -112,6 +112,11 @@ void Actor::actorInput(const Uint8* keyState)
 {
 }
 
+void Actor::logWorldTransformMatrix()
+{
+	Log::info("World Transformation Matrix of actor\n" + worldTransform.toString());
+}
+
 void Actor::computeWorldTransform()
 {
 	if (mustRecomputeWorldTransform)
@@ -120,7 +125,6 @@ void Actor::computeWorldTransform()
 		worldTransform = Matrix4::createScale(scale);
 		worldTransform *= Matrix4::createFromQuaternion(rotation);
 		worldTransform *= Matrix4::createTranslation(position);
-		//std::cout << "Player world transform matrix :\n" << worldTransform.toString() << "\n";
 
 
 		for (auto component : components)

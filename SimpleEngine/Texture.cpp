@@ -16,6 +16,10 @@ void Texture::unload()
 	{
 		SDL_DestroyTexture(SDLTexture);
 	}
+	else
+	{
+		glDeleteTextures(1, &textureID);
+	}
 }
 
 bool Texture::loadOGL(RendererOGL& renderer, const string& filenameP)

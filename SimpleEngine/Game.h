@@ -2,10 +2,10 @@
 #include <vector>
 #include "Window.h"
 #include "RendererOGL.h"
-#include "Vector2.h"
 #include "Assets.h"
 #include "SpriteComponent.h"
 #include "Player.h"
+#include "Camera.h"
 using std::vector;
 
 class Game
@@ -48,9 +48,10 @@ private:
 	Window window;
 	RendererOGL renderer;
 	bool isRunning{ true };
+	bool isUpdatingActors{ false };
 
 	Player* player{ nullptr };
-	bool isUpdatingActors{ false };
+	Camera* camera{ nullptr };
 	vector<Actor*> actors;
 	vector<Actor*> pendingActors;
 };

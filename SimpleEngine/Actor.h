@@ -49,6 +49,8 @@ public:
 	void processInput(const Uint8* keyState);
 	virtual void actorInput(const Uint8* keyState);
 
+	void logWorldTransformMatrix();
+
 private:
 	Game& game;
 	ActorState state{ ActorState::Active };

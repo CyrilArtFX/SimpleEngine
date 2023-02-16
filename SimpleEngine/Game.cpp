@@ -1,7 +1,7 @@
 #include "Game.h"
 #include "Timer.h"
 #include "Player.h"
-#include <iostream>
+#include "MeshComponent.h"
 
 bool Game::initialize()
 {
@@ -13,16 +13,45 @@ bool Game::initialize()
 void Game::load()
 {
 	//  load textures
-	Assets::loadTexture(renderer, "RacingGame/Car.png", "car");
+	/*Assets::loadTexture(renderer, "RacingGame/Car.png", "car");
 	Assets::loadTexture(renderer, "RacingGame/Obstacle.png", "obstacle");
 	Assets::loadTexture(renderer, "RacingGame/background.png", "background");
 	Assets::loadShader("Shaders/Basic.vert", "Shaders/Basic.frag", "", "", "", "Basic");
-	Assets::loadShader("Shaders/Transform.vert", "Shaders/Basic.frag", "", "", "", "Transform");
+	Assets::loadShader("Shaders/Transform.vert", "Shaders/Basic.frag", "", "", "", "Transform");*/
 	Assets::loadShader("Shaders/Sprite.vert", "Shaders/Sprite.frag", "", "", "", "Sprite");
+	Assets::loadShader("Shaders/BasicMesh.vert", "Shaders/BasicMesh.frag", "", "", "", "BasicMesh");
+
+	Assets::loadTexture(renderer, "Res/Textures/Default.png", "Default");
+	Assets::loadTexture(renderer, "Res/Textures/Cube.png", "Cube");
+	Assets::loadTexture(renderer, "Res/Textures/HealthBar.png", "HealthBar");
+	Assets::loadTexture(renderer, "Res/Textures/Plane.png", "Plane");
+	Assets::loadTexture(renderer, "Res/Textures/Radar.png", "Radar");
+	Assets::loadTexture(renderer, "Res/Textures/Sphere.png", "Sphere");
+
+	Assets::loadMesh("Res/Meshes/Cube.gpmesh", "Mesh_Cube");
+	Assets::loadMesh("Res/Meshes/Plane.gpmesh", "Mesh_Plane");
+	Assets::loadMesh("Res/Meshes/Sphere.gpmesh", "Mesh_Sphere");
 
 	//  load actors
-    player = new Player();
-	player->setPosition(Vector3{ 0.0f, 0.0f, 0.0f });
+    /*player = new Player();
+	player->setPosition(Vector3{ 0.0f, 0.0f, 0.0f });*/
+	
+	camera = new Camera();
+
+	Actor* a = new Actor();
+	a->setPosition(Vector3(200.0f, 105.0f, 0.0f));
+	a->setScale(100.0f);
+	Quaternion q(Vector3::unitY, -Maths::piOver2);
+	q = Quaternion::concatenate(q, Quaternion(Vector3::unitZ, Maths::pi + Maths::pi / 4.0f));
+	a->setRotation(q);
+	MeshComponent* mc = new MeshComponent(a);
+	mc->setMesh(Assets::getMesh("Mesh_Cube"));
+
+	Actor* b = new Actor();
+	b->setPosition(Vector3(200.0f, -75.0f, 0.0f));
+	b->setScale(3.0f);
+	MeshComponent* mcb = new MeshComponent(b);
+	mcb->setMesh(Assets::getMesh("Mesh_Sphere"));
 }
 
 void Game::loop()
@@ -120,6 +149,8 @@ void Game::update(float dt)
 	{
 		delete deadActor;
 	}
+
+	//camera->logWorldTransformMatrix();
 }
 
 void Game::addActor(Actor* actor)
