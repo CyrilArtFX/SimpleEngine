@@ -20,7 +20,7 @@ Actor::~Actor()
 	}
 }
 
-void Actor::setPosition(Vector2 positionP)
+void Actor::setPosition(Vector3 positionP)
 {
 	position = positionP;
 	mustRecomputeWorldTransform = true;
@@ -32,10 +32,15 @@ void Actor::setScale(float scaleP)
 	mustRecomputeWorldTransform = true;
 }
 
-void Actor::setRotation(float rotationP)
+void Actor::setRotation(Quaternion rotationP)
 {
 	rotation = rotationP;
 	mustRecomputeWorldTransform = true;
+}
+
+void Actor::setState(ActorState stateP)
+{
+	state = stateP;
 }
 
 void Actor::update(float dt)
@@ -86,9 +91,9 @@ void Actor::removeComponent(Component* component)
 	}
 }
 
-Vector2 Actor::getForward() const
+Vector3 Actor::getForward() const
 {
-	return Vector2(Maths::cos(rotation), Maths::sin(rotation));
+	return Vector3::transform(Vector3::unitX, rotation);
 }
 
 void Actor::processInput(const Uint8* keyState)
@@ -109,14 +114,12 @@ void Actor::actorInput(const Uint8* keyState)
 
 void Actor::computeWorldTransform()
 {
-	if (mustRecomputeWorldTransform || forceRecomputeWorldTransform)
+	if (mustRecomputeWorldTransform)
 	{
-		Vector2 camPos = game.getRenderer().getCamPos();
-
 		mustRecomputeWorldTransform = false;
 		worldTransform = Matrix4::createScale(scale);
-		worldTransform *= Matrix4::createRotationZ(rotation);
-		worldTransform *= Matrix4::createTranslation(Vector3(position.x - camPos.x, position.y - camPos.y, 0.0f));
+		worldTransform *= Matrix4::createFromQuaternion(rotation);
+		worldTransform *= Matrix4::createTranslation(position);
 		//std::cout << "Player world transform matrix :\n" << worldTransform.toString() << "\n";
 
 

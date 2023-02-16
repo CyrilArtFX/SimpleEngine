@@ -1,7 +1,6 @@
 #include "Game.h"
 #include "Timer.h"
 #include "Player.h"
-#include "RaceTimer.h"
 #include <iostream>
 
 bool Game::initialize()
@@ -23,35 +22,7 @@ void Game::load()
 
 	//  load actors
     player = new Player();
-	player->setPosition(Vector2{ -300, -500 });
-	Vector2 playerPos = player->getPosition();
-	renderer.setCamPos(Vector2(playerPos.x - WINDOW_WIDTH / 2, playerPos.y - WINDOW_HEIGHT / 2));
-
-	auto background = new Actor();
-	auto sc = new SpriteComponent(background, Assets::getTexture("background"), 10);
-	background->forceRecomputeWorldTransform = true;
-
-	//new RaceTimer();
-
-
-	//  obstacles
-	new Obstacle(Vector2{200.0f, -560.0f}, Vector2{200.0f, -440.0f});
-	new Obstacle(Vector2{ 960.0f, -240.0f }, Vector2{ 1080.0f, -360.0f });
-	new Obstacle(Vector2{ 600.0f, 440.0f }, Vector2{ 600.0f, 560.0f });
-	new Obstacle(Vector2{ -300.0f, 40.0f }, Vector2{ -300.0f, 160.0f });
-	new Obstacle(Vector2{ -640.0f, -300.0f }, Vector2{ -520.0f, -300.0f });
-
-	//  road colliders
-    new RoadCollider(Rectangle{-670.0f, -575.0f, 1140.0f, 140.0f});
-	new RoadCollider(Rectangle{ 330.0f, -375.0f, 740.0f, 140.0f });
-	new RoadCollider(Rectangle{ -70.0f, 425.0f, 1140.0f, 140.0f });
-	new RoadCollider(Rectangle{ -1070.0f, 25.0f, 1140.0f, 140.0f });
-	new RoadCollider(Rectangle{ -1070.0f, -175.0f, 540.0f, 140.0f });
-	new RoadCollider(Rectangle{ 330.0f, -435.0f, 140.0f, 60.0f });
-	new RoadCollider(Rectangle{ 930.0f, -235.0f, 140.0f, 660.0f });
-	new RoadCollider(Rectangle{ -70.0f, 125.0f, 140.0f, 360.0f });
-	new RoadCollider(Rectangle{ -1070.0f, -35.0f, 140.0f, 60.0f });
-	new RoadCollider(Rectangle{ -670.0f, -435.0f, 140.0f, 260.0f });
+	player->setPosition(Vector3{ 0.0f, 0.0f, 0.0f });
 }
 
 void Game::loop()
@@ -149,9 +120,6 @@ void Game::update(float dt)
 	{
 		delete deadActor;
 	}
-
-	Vector2 playerPos = player->getPosition();
-	renderer.setCamPos(Vector2(playerPos.x - WINDOW_WIDTH / 2, playerPos.y - WINDOW_HEIGHT / 2));
 }
 
 void Game::addActor(Actor* actor)
@@ -188,42 +156,4 @@ void Game::render()
 	renderer.beginDraw();
 	renderer.draw();
 	renderer.endDraw();
-}
-
-vector<Obstacle*>& Game::getObstacles()
-{
-	return obstacles;
-}
-
-void Game::addObstacle(Obstacle* obstacle)
-{
-	obstacles.emplace_back(obstacle);
-}
-
-void Game::removeObstacle(Obstacle* obstacle)
-{
-	auto iter = std::find(begin(obstacles), end(obstacles), obstacle);
-	if (iter != obstacles.end())
-	{
-		obstacles.erase(iter);
-	}
-}
-
-vector<RoadCollider*>& Game::getRoadColliders()
-{
-	return roadColliders;
-}
-
-void Game::addRoadCollider(RoadCollider* roadCollider)
-{
-	roadColliders.emplace_back(roadCollider);
-}
-
-void Game::removeRoadCollider(RoadCollider* roadCollider)
-{
-	auto iter = std::find(begin(roadColliders), end(roadColliders), roadCollider);
-	if (iter != roadColliders.end())
-	{
-		roadColliders.erase(iter);
-	}
 }

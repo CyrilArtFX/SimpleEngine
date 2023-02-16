@@ -1,7 +1,6 @@
 #pragma once
 #include <string>
 #include "IRenderer.h"
-#include "RendererSDL.h"
 #include "RendererOGL.h"
 using std::string;
 
@@ -12,7 +11,6 @@ public:
 	~Texture();
 
 	void unload();
-	bool loadSDL(RendererSDL& rendererP, const string& filenameP);
 	bool loadOGL(RendererOGL& rendererP, const string& filenameP);
 
 	SDL_Texture* toSDLTexture() const { return SDLTexture; }
@@ -23,7 +21,7 @@ public:
 	int getHeight() const { return height; }
 
 private:
-	unsigned int textureID;
+	unsigned int textureID{ 0 };
 	string filename{ "" };
 	SDL_Texture* SDLTexture{ nullptr };
 	int width{ 0 };

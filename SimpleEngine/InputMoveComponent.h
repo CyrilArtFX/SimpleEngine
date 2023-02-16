@@ -23,8 +23,6 @@ public:
 	void setClockwiseKey(int key);
 	void setCounterClockwiseKey(int key);
 
-	void update(float dt) override;
-
 private:
 	float maxForwardSpeed{ 0.0f };
 	float maxAngularSpeed{ 0.0f };
@@ -34,6 +32,5 @@ private:
 	int clockwiseKey{ SDL_SCANCODE_D };
 	int counterClockwiseKey{ SDL_SCANCODE_A };
 
-	void testForObstacles(Vector2 newPosition);
 	CircleCollisionComponent* collision{ nullptr };
 };

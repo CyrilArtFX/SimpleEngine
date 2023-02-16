@@ -59,11 +59,7 @@ void Assets::clear()
 Texture Assets::loadTextureFromFile(IRenderer& renderer, const string& filename)
 {
 	Texture texture;
-	if (renderer.type() == IRenderer::Type::SDL)
-	{
-		texture.loadSDL(dynamic_cast<RendererSDL&>(renderer), filename);
-	}
-    else if (renderer.type() == IRenderer::Type::OGL)
+    if (renderer.type() == IRenderer::Type::OGL)
     {
         texture.loadOGL(dynamic_cast<RendererOGL&>(renderer), filename);
     }

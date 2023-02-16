@@ -2,6 +2,8 @@
 #include <vector>
 #include "Vector2.h"
 #include "Matrix4.h"
+#include "Vector3.h"
+#include "Quaternion.h"
 #include "SDL_stdinc.h"
 using std::vector;
 
@@ -25,15 +27,17 @@ public:
 
 	Game& getGame() const { return game; }
 	const ActorState getState() const { return state; }
-	const Vector2 getPosition() const { return position; }
+	const Vector3 getPosition() const { return position; }
 	const float getScale() const { return scale; }
-	const float getRotation() const { return rotation; }
-	Vector2 getForward() const;
+	const Quaternion getRotation() const { return rotation; }
+	Vector3 getForward() const;
 	const Matrix4& getWorldTransform() const { return worldTransform; }
 
-	void setPosition(Vector2 positionP);
+	void setPosition(Vector3 positionP);
 	void setScale(float scaleP);
-	void setRotation(float rotationP);
+	void setRotation(Quaternion rotationP);
+	void setState(ActorState stateP);
+
 	void computeWorldTransform();
 
 	void update(float dt);
@@ -45,14 +49,12 @@ public:
 	void processInput(const Uint8* keyState);
 	virtual void actorInput(const Uint8* keyState);
 
-	bool forceRecomputeWorldTransform{ false };
-
 private:
 	Game& game;
 	ActorState state{ ActorState::Active };
-	Vector2 position{ Vector2::zero };
+	Vector3 position{ Vector3::zero };
 	float scale{ 1.0f };
-	float rotation{ 0.0f }; //  in radians
+	Quaternion rotation{ Quaternion::identity };
 	Matrix4 worldTransform;
 	bool mustRecomputeWorldTransform{ true };
 

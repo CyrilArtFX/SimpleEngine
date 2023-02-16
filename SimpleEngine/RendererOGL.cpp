@@ -4,6 +4,7 @@
 #include "Log.h"
 #include "SpriteComponent.h"
 #include "Assets.h"
+#include "Actor.h"
 #include <GL/glew.h>
 #include <SDL_image.h>
 #include <iostream>
@@ -52,8 +53,7 @@ bool RendererOGL::initialize(Window& windowP)
 		return false;
 	}
 
-	vertexArray = new VertexArray(vertices, 4, indices, 6);
-	shader = &Assets::getShader("Sprite");
+	vertexArray = new VertexArray(spriteVertices, 4, indices, 6);
 	return true;
 }
 
@@ -66,8 +66,8 @@ void RendererOGL::beginDraw()
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	// Active shader and vertex array
-	shader->use();
-	shader->setMatrix4("uViewProj", viewProj);
+	Assets::getShader("Sprite").use();
+	Assets::getShader("Sprite").setMatrix4("uViewProj", viewProj);
 	//std::cout << "Render Begin Draw - View Projection Matrix :\n" << viewProj.toString() << "\n";
 	vertexArray->setActive();
 }
@@ -82,9 +82,7 @@ void RendererOGL::drawSprite(const Actor& actor, const Texture& tex, Rectangle s
 	Matrix4 scaleMat = Matrix4::createScale((float)tex.getWidth(), (float)tex.getHeight(), 1.0f);
 	Matrix4 world = scaleMat * actor.getWorldTransform();
 	//std::cout << "Render Draw Sprite - World Matrix :\n" << world.toString() << "\n";
-	Matrix4 pixelTranslation = Matrix4::createTranslation(Vector3(-WINDOW_WIDTH / 2 - origin.x, -WINDOW_HEIGHT / 2 - origin.y, 0.0f));
-	//std::cout << "Render Draw Sprite - Pixel Translation Matrix :\n" << pixelTranslation.toString() << "\n";
-	shader->setMatrix4("uWorldTransform", world * pixelTranslation);
+	Assets::getShader("Sprite").setMatrix4("uWorldTransform", world /* * pixelTranslation*/);
 	tex.setActive();
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
 }
@@ -98,11 +96,6 @@ void RendererOGL::close()
 {
 	SDL_GL_DeleteContext(context);
 	delete vertexArray;
-}
-
-void RendererOGL::setCamPos(Vector2 camPosP)
-{
-	camPos = camPosP;
 }
 
 void RendererOGL::addSprite(SpriteComponent* sprite)

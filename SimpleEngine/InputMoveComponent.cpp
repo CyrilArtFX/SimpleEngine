@@ -1,8 +1,6 @@
 #include "InputMoveComponent.h"
 #include "Maths.h"
 #include "Actor.h"
-#include "RoadCollider.h"
-#include "RectangleCollisionComponent.h"
 #include "Game.h"
 #include <iostream>
 
@@ -33,43 +31,6 @@ void InputMoveComponent::processInput(const Uint8* keyState)
 		angularSpeed += maxAngularSpeed;
 	}
 	setAngularSpeed(angularSpeed);
-}
-
-void InputMoveComponent::update(float dt)
-{
-	if (!Maths::nearZero(angularSpeed))
-	{
-		float newRotation = owner.getRotation() + angularSpeed * dt;
-		owner.setRotation(newRotation);
-	}
-
-	if (!Maths::nearZero(forwardSpeed))
-	{
-		Vector2 newPosition = owner.getPosition() + owner.getForward() * forwardSpeed * dt;
-
-		auto roadColliders = owner.getGame().getRoadColliders();
-		for (auto roadCollider : roadColliders)
-		{
-			if (roadCollider->getCollision().intersect(newPosition))
-			{
-				testForObstacles(newPosition);
-				break;
-			}
-		}
-	}
-}
-
-void InputMoveComponent::testForObstacles(Vector2 newPosition)
-{
-	auto obstacles = owner.getGame().getObstacles();
-	for (auto obstacle : obstacles)
-	{
-		if (obstacle->getCollision().intersect(collision->getCenter(), *collision))
-		{
-			return;
-		}
-	}
-	owner.setPosition(newPosition);
 }
 
 
