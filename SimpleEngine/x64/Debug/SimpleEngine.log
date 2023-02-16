@@ -1,2 +1,20 @@
-﻿  Camera.cpp
+﻿  Actor.cpp
+  Assets.cpp
+D:\GAME3_CROZAT_Cyril\SimpleEngine\SimpleEngine\Assets.cpp(255,33): warning C4244: 'argument' : conversion de 'double' en 'const unsigned __int64', perte possible de données
+D:\GAME3_CROZAT_Cyril\SimpleEngine\SimpleEngine\Assets.cpp(272,168): warning C4267: 'argument' : conversion de 'size_t' en 'unsigned int', perte possible de données
+  Camera.cpp
+  Cube.cpp
+  Game.cpp
+  InputMoveComponent.cpp
+  Main.cpp
+  Mesh.cpp
+  MeshComponent.cpp
+D:\GAME3_CROZAT_Cyril\SimpleEngine\SimpleEngine\MeshComponent.cpp(23,45): warning C4267: 'argument' : conversion de 'size_t' en 'int', perte possible de données
+  Plane.cpp
+  Player.cpp
+  RendererOGL.cpp
+  Sphere.cpp
+  SpriteComponent.cpp
+  Texture.cpp
+  Génération de code en cours...
   SimpleEngine.vcxproj -> D:\GAME3_CROZAT_Cyril\SimpleEngine\x64\Debug\SimpleEngine.exe

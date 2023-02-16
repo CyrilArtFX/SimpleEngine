@@ -1,5 +1,7 @@
 #pragma once
 #include "Component.h"
+#include <string>
+
 class MeshComponent : public Component
 {
 public:

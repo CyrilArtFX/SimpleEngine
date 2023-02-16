@@ -2,6 +2,9 @@
 #include "Timer.h"
 #include "Player.h"
 #include "MeshComponent.h"
+#include "Cube.h"
+#include "Sphere.h"
+#include "Plane.h"
 
 bool Game::initialize()
 {
@@ -13,13 +16,14 @@ bool Game::initialize()
 void Game::load()
 {
 	//  load textures
-	/*Assets::loadTexture(renderer, "RacingGame/Car.png", "car");
-	Assets::loadTexture(renderer, "RacingGame/Obstacle.png", "obstacle");
+	Assets::loadTexture(renderer, "RacingGame/Car.png", "car");
+	/*Assets::loadTexture(renderer, "RacingGame/Obstacle.png", "obstacle");
 	Assets::loadTexture(renderer, "RacingGame/background.png", "background");
 	Assets::loadShader("Shaders/Basic.vert", "Shaders/Basic.frag", "", "", "", "Basic");
 	Assets::loadShader("Shaders/Transform.vert", "Shaders/Basic.frag", "", "", "", "Transform");*/
 	Assets::loadShader("Shaders/Sprite.vert", "Shaders/Sprite.frag", "", "", "", "Sprite");
 	Assets::loadShader("Shaders/BasicMesh.vert", "Shaders/BasicMesh.frag", "", "", "", "BasicMesh");
+	Assets::loadShader("Shaders/Phong.vert", "Shaders/Phong.frag", "", "", "", "Phong");
 
 	Assets::loadTexture(renderer, "Res/Textures/Default.png", "Default");
 	Assets::loadTexture(renderer, "Res/Textures/Cube.png", "Cube");
@@ -33,25 +37,77 @@ void Game::load()
 	Assets::loadMesh("Res/Meshes/Sphere.gpmesh", "Mesh_Sphere");
 
 	//  load actors
-    /*player = new Player();
-	player->setPosition(Vector3{ 0.0f, 0.0f, 0.0f });*/
+    player = new Player();
 	
 	camera = new Camera();
 
-	Actor* a = new Actor();
+	Cube* a = new Cube();
 	a->setPosition(Vector3(200.0f, 105.0f, 0.0f));
 	a->setScale(100.0f);
 	Quaternion q(Vector3::unitY, -Maths::piOver2);
 	q = Quaternion::concatenate(q, Quaternion(Vector3::unitZ, Maths::pi + Maths::pi / 4.0f));
 	a->setRotation(q);
-	MeshComponent* mc = new MeshComponent(a);
-	mc->setMesh(Assets::getMesh("Mesh_Cube"));
 
-	Actor* b = new Actor();
+	Sphere* b = new Sphere();
 	b->setPosition(Vector3(200.0f, -75.0f, 0.0f));
 	b->setScale(3.0f);
-	MeshComponent* mcb = new MeshComponent(b);
-	mcb->setMesh(Assets::getMesh("Mesh_Sphere"));
+
+	// Floor and walls
+
+	// Setup floor
+	const float start = -1250.0f;
+	const float size = 250.0f;
+	for (int i = 0; i < 10; i++)
+	{
+		for (int j = 0; j < 10; j++)
+		{
+			Plane* p = new Plane();
+			p->setPosition(Vector3(start + i * size, start + j * size, -100.0f));
+		}
+	}
+
+	// Left/right walls
+	q = Quaternion(Vector3::unitX, Maths::piOver2);
+	for (int i = 0; i < 10; i++)
+	{
+		Plane* p = new Plane();
+		p->setPosition(Vector3(start + i * size, start - size, 0.0f));
+		p->setRotation(q);
+
+		p = new Plane();
+		p->setPosition(Vector3(start + i * size, -start + size, 0.0f));
+		p->setRotation(q);
+	}
+
+	q = Quaternion::concatenate(q, Quaternion(Vector3::unitZ, Maths::piOver2));
+	// Forward/back walls
+	for (int i = 0; i < 10; i++)
+	{
+		Plane* p = new Plane();
+		p->setPosition(Vector3(start - size, start + i * size, 0.0f));
+		p->setRotation(q);
+
+		p = new Plane();
+		p->setPosition(Vector3(-start + size, start + i * size, 0.0f));
+		p->setRotation(q);
+	}
+
+	// Setup lights
+	renderer.setAmbientLight(Vector3(0.2f, 0.2f, 0.2f));
+	DirectionalLight& dir = renderer.getDirectionalLight();
+	dir.direction = Vector3(0.0f, -0.707f, -0.707f);
+	dir.diffuseColor = Vector3(0.78f, 0.88f, 1.0f);
+	dir.specColor = Vector3(0.8f, 0.8f, 0.8f);
+
+	// UI elements
+	Actor* ui = new Actor();
+	ui->setPosition(Vector3(-350.0f, -350.0f, 0.0f));
+	SpriteComponent* sc = new SpriteComponent(ui, Assets::getTexture("HealthBar"));
+
+	ui = new Actor();
+	ui->setPosition(Vector3(375.0f, -275.0f, 0.0f));
+	ui->setScale(0.75f);
+	sc = new SpriteComponent(ui, Assets::getTexture("Radar"));
 }
 
 void Game::loop()
