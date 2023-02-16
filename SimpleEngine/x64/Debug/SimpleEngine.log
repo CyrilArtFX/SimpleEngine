@@ -1,16 +1,2 @@
-﻿  Actor.cpp
-  Camera.cpp
-  Component.cpp
-  ControllerState.cpp
-  Game.cpp
-  InputMoveComponent.cpp
-  InputSystem.cpp
-  KeyboardState.cpp
-  Main.cpp
-  MeshComponent.cpp
-D:\GAME3_CROZAT_Cyril\SimpleEngine\SimpleEngine\MeshComponent.cpp(23,45): warning C4267: 'argument' : conversion de 'size_t' en 'int', perte possible de données
-  MouseState.cpp
-  SpriteComponent.cpp
-  Window.cpp
-  Génération de code en cours...
-  SimpleEngine.vcxproj -> D:\GAME3_CROZAT_Cyril\SimpleEngine\x64\Debug\SimpleEngine.exe
+﻿  FPSActor.cpp
+  SimpleEngine.vcxproj -> E:\Exercices Prog\SimpleEngine\x64\Debug\SimpleEngine.exe

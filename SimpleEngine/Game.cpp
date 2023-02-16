@@ -5,6 +5,7 @@
 #include "Cube.h"
 #include "Sphere.h"
 #include "Plane.h"
+#include "FPSActor.h"
 
 bool Game::initialize()
 {
@@ -32,15 +33,20 @@ void Game::load()
 	Assets::loadTexture(renderer, "Res/Textures/Plane.png", "Plane");
 	Assets::loadTexture(renderer, "Res/Textures/Radar.png", "Radar");
 	Assets::loadTexture(renderer, "Res/Textures/Sphere.png", "Sphere");
+	Assets::loadTexture(renderer, "Res/Textures/Crosshair.png", "Crosshair");
+	Assets::loadTexture(renderer, "Res/Textures/RacingCar.png", "RacingCar");
+	Assets::loadTexture(renderer, "Res/Textures/Rifle.png", "Rifle");
 
 	Assets::loadMesh("Res/Meshes/Cube.gpmesh", "Mesh_Cube");
 	Assets::loadMesh("Res/Meshes/Plane.gpmesh", "Mesh_Plane");
 	Assets::loadMesh("Res/Meshes/Sphere.gpmesh", "Mesh_Sphere");
+	Assets::loadMesh("Res/Meshes/Rifle.gpmesh", "Mesh_Rifle");
+	Assets::loadMesh("Res/Meshes/RacingCar.gpmesh", "Mesh_RacingCar");
 
 	//  load actors
     player = new Player();
-	
-	camera = new Camera();
+
+	fps = new FPSActor();
 
 	Cube* a = new Cube();
 	a->setPosition(Vector3(200.0f, 105.0f, 0.0f));
@@ -109,6 +115,11 @@ void Game::load()
 	ui->setPosition(Vector3(375.0f, -275.0f, 0.0f));
 	ui->setScale(0.75f);
 	sc = new SpriteComponent(ui, Assets::getTexture("Radar"));
+
+	// Corsshair
+	Actor* crosshairActor = new Actor();
+	crosshairActor->setScale(2.0f);
+	crosshair = new SpriteComponent(crosshairActor, Assets::getTexture("Crosshair"));
 }
 
 void Game::loop()

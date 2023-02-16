@@ -25,3 +25,8 @@ void SpriteComponent::draw(IRenderer& renderer)
 	Vector2 origin{ texWidth / 2.0f, texHeight / 2.0f };
 	renderer.drawSprite(owner, texture, Rectangle::nullRect, origin, IRenderer::Flip::None);
 }
+
+void SpriteComponent::setVisible(bool isVisibleP)
+{
+	isVisible = isVisibleP;
+}

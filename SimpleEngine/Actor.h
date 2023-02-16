@@ -31,6 +31,7 @@ public:
 	const float getScale() const { return scale; }
 	const Quaternion getRotation() const { return rotation; }
 	Vector3 getForward() const;
+	Vector3 getRight() const;
 	const Matrix4& getWorldTransform() const { return worldTransform; }
 
 	void setPosition(Vector3 positionP);

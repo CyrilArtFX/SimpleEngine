@@ -11,6 +11,8 @@ public:
 
 	float getForwardSpeed() const { return forwardSpeed; }
 	void setForwardSpeed(float forwardSpeedP);
+	float getStrafeSpeed() const { return strafeSpeed; }
+	void setStrafeSpeed(float strafeSpeedP);
 	float getAngularSpeed() const { return angularSpeed; }
 	void setAngularSpeed(float angularSpeedP);
 
@@ -18,5 +20,6 @@ public:
 
 protected:
 	float forwardSpeed{ 0.0f };
+	float strafeSpeed{ 0.0f };
 	float angularSpeed{ 0.0f };
 };

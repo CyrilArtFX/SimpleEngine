@@ -5,13 +5,12 @@
 #include "Assets.h"
 #include "SpriteComponent.h"
 #include "Player.h"
-#include "Camera.h"
 #include "InputSystem.h"
 using std::vector;
 
 class Game
 {
-// Begin SINGLETON
+	// Begin SINGLETON
 public:
 	static Game& instance()
 	{
@@ -26,7 +25,7 @@ public:
 
 private:
 	Game() = default;
-// End SINGLETON
+	// End SINGLETON
 
 public:
 	bool initialize();
@@ -53,7 +52,8 @@ private:
 	bool isUpdatingActors{ false };
 
 	Player* player{ nullptr };
-	Camera* camera{ nullptr };
+	class FPSActor* fps{ nullptr };
+	class SpriteComponent* crosshair{ nullptr };
 	vector<Actor*> actors;
 	vector<Actor*> pendingActors;
 };

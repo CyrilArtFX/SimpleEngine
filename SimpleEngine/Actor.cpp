@@ -97,6 +97,11 @@ Vector3 Actor::getForward() const
 	return Vector3::transform(Vector3::unitX, rotation);
 }
 
+Vector3 Actor::getRight() const
+{
+	return Vector3::transform(Vector3::unitY, rotation);
+}
+
 void Actor::processInput(const InputState& inputState)
 {
 	if (state == ActorState::Active) 
