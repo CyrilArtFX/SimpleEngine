@@ -64,6 +64,7 @@ void InputSystem::preUpdate()
 	memcpy(inputState.keyboard.previousState, inputState.keyboard.currentState, SDL_NUM_SCANCODES);
 	// Mouse
 	inputState.mouse.previousButtons = inputState.mouse.currentButtons;
+	setMouseRelativeMode(true);
 	inputState.mouse.scrollWheel = Vector2::zero;
 	// Controller
 	memcpy(inputState.controller.previousButtons, inputState.controller.currentButtons, SDL_CONTROLLER_BUTTON_MAX);

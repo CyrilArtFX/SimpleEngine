@@ -7,6 +7,7 @@
 #include "Plane.h"
 #include "FPSActor.h"
 #include "FollowActor.h"
+#include "MultiCameraComponent.h"
 
 bool Game::initialize()
 {
@@ -47,8 +48,14 @@ void Game::load()
 	//  load actors
     player = new Player();
 
-	fps = new FPSActor();
-	follow = new FollowActor();
+	//fps = new FPSActor();
+	//follow = new FollowActor();
+
+	auto testCam = new Actor();
+	auto testCamMesh = new MeshComponent(testCam);
+	testCamMesh->setMesh(Assets::getMesh("Mesh_RacingCar"));
+	auto testCamCam = new MultiCameraComponent(testCam, testCam);
+	testCam->setPosition(Vector3{ 500.0f, 450.0f, 2045.0f });
 
 	Cube* a = new Cube();
 	a->setPosition(Vector3(200.0f, 105.0f, 0.0f));
@@ -184,14 +191,14 @@ void Game::processInput()
 		isRunning = false;
 	}
 
-	if (input.keyboard.getKeyState(SDL_SCANCODE_1) == ButtonState::Pressed)
+	/*if (input.keyboard.getKeyState(SDL_SCANCODE_1) == ButtonState::Pressed)
 	{
 		changeCamera(1);
 	}
 	else if (input.keyboard.getKeyState(SDL_SCANCODE_2) == ButtonState::Pressed)
 	{
 		changeCamera(2);
-	}
+	}*/
 
 	// Actor input
 	isUpdatingActors = true;

@@ -62,10 +62,10 @@ void FPSActor::actorInput(const InputState& inputState)
 	moveComponent->setStrafeSpeed(strafeSpeed);
 	// Mouse mouvement
 	Vector2 mousePosition = inputState.mouse.getPosition();
-	float x = mousePosition.x - lastFrameMousePos.x;
-	float y = mousePosition.y - lastFrameMousePos.y;
+	float x = mousePosition.x;
+	float y = mousePosition.y;
 	const int maxMouseSpeed = 500;
-	const float maxAngularSpeed = Maths::pi * 8;
+	const float maxAngularSpeed = Maths::pi * 15;
 	float angularSpeed = 0.0f;
 	if (x != 0)
 	{
@@ -73,7 +73,7 @@ void FPSActor::actorInput(const InputState& inputState)
 		angularSpeed *= maxAngularSpeed;
 	}
 	moveComponent->setAngularSpeed(angularSpeed);
-	const float maxPitchSpeed = Maths::pi * 8;
+	const float maxPitchSpeed = Maths::pi * 15;
 	float pitchSpeed = 0.0f;
 	if (y != 0)
 	{
