@@ -7,7 +7,7 @@
 #include "Plane.h"
 #include "FPSActor.h"
 #include "FollowActor.h"
-#include "MultiCameraComponent.h"
+#include "MultiCameraActor.h"
 
 bool Game::initialize()
 {
@@ -46,16 +46,12 @@ void Game::load()
 	Assets::loadMesh("Res/Meshes/RacingCar.gpmesh", "Mesh_RacingCar");
 
 	//  load actors
-    player = new Player();
+    //player = new Player();
 
 	//fps = new FPSActor();
 	//follow = new FollowActor();
 
-	auto testCam = new Actor();
-	auto testCamMesh = new MeshComponent(testCam);
-	testCamMesh->setMesh(Assets::getMesh("Mesh_RacingCar"));
-	auto testCamCam = new MultiCameraComponent(testCam, testCam);
-	testCam->setPosition(Vector3{ 500.0f, 450.0f, 2045.0f });
+	auto testCam = new MultiCameraActor();
 
 	Cube* a = new Cube();
 	a->setPosition(Vector3(200.0f, 105.0f, 0.0f));
@@ -126,9 +122,9 @@ void Game::load()
 	sc = new SpriteComponent(ui, Assets::getTexture("Radar"));
 
 	// Corsshair
-	Actor* crosshairActor = new Actor();
+	/*Actor* crosshairActor = new Actor();
 	crosshairActor->setScale(2.0f);
-	crosshair = new SpriteComponent(crosshairActor, Assets::getTexture("Crosshair"));
+	crosshair = new SpriteComponent(crosshairActor, Assets::getTexture("Crosshair"));*/
 }
 
 void Game::loop()

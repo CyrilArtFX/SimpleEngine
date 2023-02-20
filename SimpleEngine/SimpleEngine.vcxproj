@@ -154,6 +154,7 @@
     <ClCompile Include="MeshComponent.cpp" />
     <ClCompile Include="MouseState.cpp" />
     <ClCompile Include="MoveComponent.cpp" />
+    <ClCompile Include="MultiCameraActor.cpp" />
     <ClCompile Include="MultiCameraComponent.cpp" />
     <ClCompile Include="Plane.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -196,6 +197,7 @@
     <ClInclude Include="MeshComponent.h" />
     <ClInclude Include="MouseState.h" />
     <ClInclude Include="MoveComponent.h" />
+    <ClInclude Include="MultiCameraActor.h" />
     <ClInclude Include="MultiCameraComponent.h" />
     <ClInclude Include="Plane.h" />
     <ClInclude Include="Player.h" />

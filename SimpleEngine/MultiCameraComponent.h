@@ -19,11 +19,11 @@ public:
 
 private:
 	class Actor* target;
-	float yaw{ 0.0f }; //  "horizontal" rotation
-	float pitch{ 0.0f }; //  "vertical" rotation
+	float yaw{ -90.0f }; //  "horizontal" rotation
+	float pitch{ 30.0f }; //  "vertical" rotation
 	float springArmLength{ 500.0f };
 
-	float minPitch{ -60.0f };
+	float minPitch{ -35.0f };
 	float maxPitch{ 80.0f };
 
 	Vector2 mouseSensitivity{ 0.12f, 0.10f };
