@@ -1,11 +1,12 @@
 #include "MultiCameraComponent.h"
 #include "InputSystem.h"
 #include "Actor.h"
+#include "CollisionComponent3D.h"
 #include <iostream>
 
 MultiCameraComponent::MultiCameraComponent(class Actor* ownerP, class Actor* targetP) : CameraComponent(ownerP), target(targetP)
 {
-
+	targetPos = target->getPosition();
 }
 
 void MultiCameraComponent::update(float dt)
@@ -19,11 +20,24 @@ void MultiCameraComponent::update(float dt)
 	Vector3 pitchDirection = Vector3{ Maths::cos(pitchRadian), 0.0f, -Maths::sin(pitchRadian) };
 
 	Vector3 lookDirection = Vector3{ yawDirection.x * pitchDirection.x, yawDirection.y * pitchDirection.x, pitchDirection.z };
-	Vector3 camPos = target->getPosition() - (lookDirection * springArmLength);
+	targetPos = Vector3::smoothDamp(targetPos, target->getPosition(), targetMoveVelocity, 0.2f, dt);
+	float springArmChecked = springArmLength;
+	for (auto iter : collisionsToCheck)
+	{
+		float t;
+		if (iter->intersectWithRay(targetPos, -lookDirection, springArmLength, t))
+		{
+			springArmChecked = t;
+			break;
+		}
+	}
+	std::cout << springArmChecked << "\n";
+	Vector3 camPos = targetPos - (lookDirection * springArmChecked);
 
-	Vector3 targetPos = target->getPosition();
 	Matrix4 view = Matrix4::createLookAt(camPos, targetPos, Vector3::unitZ);
 	setViewMatrix(view);
+
+	
 }
 
 void MultiCameraComponent::processInput(const InputState& inputState)
@@ -38,10 +52,16 @@ void MultiCameraComponent::processInput(const InputState& inputState)
 void MultiCameraComponent::setTarget(Actor* targetP)
 {
 	target = targetP;
+	targetPos = target->getPosition();
 }
 
 void MultiCameraComponent::setPitchClamp(float minPitchP, float maxPitchP)
 {
 	minPitch = minPitchP;
 	maxPitch = maxPitchP;
+}
+
+void MultiCameraComponent::addCollisionToCheck(CollisionComponent3D* col)
+{
+	collisionsToCheck.push_back(col);
 }

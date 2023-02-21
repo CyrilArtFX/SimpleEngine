@@ -39,3 +39,8 @@ void MultiCameraActor::actorInput(const InputState& inputState)
 	moveComponent->setForwardSpeed(forwardSpeed);
 	moveComponent->setAngularSpeed(angularSpeed);
 }
+
+void MultiCameraActor::addCollisionToCheck(CollisionComponent3D* col)
+{
+	cameraComponent->addCollisionToCheck(col);
+}

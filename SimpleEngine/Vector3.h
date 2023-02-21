@@ -80,6 +80,11 @@ public:
 		return *this;
 	}
 
+	Vector3 operator-() const
+	{
+		return Vector3(-x, -y, -z);
+	}
+
 	// Normalize the provided vector
 	static Vector3 normalize(const Vector3& vec)
 	{
@@ -102,6 +107,16 @@ public:
 		temp.y = a.z * b.x - a.x * b.z;
 		temp.z = a.x * b.y - a.y * b.x;
 		return temp;
+	}
+
+	static Vector3 smoothDamp(const Vector3& from, const Vector3& to, Vector3& velocity, const float smoothTime, const float deltaTime)
+	{
+		return Vector3
+		{
+			Maths::smoothDamp(from.x, to.x, velocity.x, smoothTime, deltaTime),
+			Maths::smoothDamp(from.y, to.y, velocity.y, smoothTime, deltaTime),
+			Maths::smoothDamp(from.z, to.z, velocity.z, smoothTime, deltaTime)
+		};
 	}
 
 	// Lerp from A to B by f

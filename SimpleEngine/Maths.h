@@ -109,4 +109,15 @@ namespace Maths
 	{
 		return static_cast<int>(std::round(num));
 	}
+
+	inline float smoothDamp(float from, float to, float& velocity, float smoothTime, float dt)
+	{
+		float omega = 2.0f / smoothTime;
+		float x = omega * dt;
+		float exponential = 1.0f / (1.0f + x + 0.48f * x * x + 0.235f * x * x * x);
+		float change = from - to;
+		float temp = (velocity + omega + change) * dt;
+		velocity = (velocity - omega * temp) * exponential;
+		return to + (change + temp) * exponential;
+	}
 }

@@ -7,6 +7,7 @@ public:
 	MultiCameraActor();
 
 	void actorInput(const InputState& inputState) override;
+	void addCollisionToCheck(class CollisionComponent3D* col);
 
 private:
 	class MoveComponent* moveComponent;

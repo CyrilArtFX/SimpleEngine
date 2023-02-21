@@ -63,6 +63,7 @@ void Game::load()
 	Sphere* b = new Sphere();
 	b->setPosition(Vector3(200.0f, -75.0f, 0.0f));
 	b->setScale(3.0f);
+	
 
 	// Floor and walls
 
@@ -125,6 +126,8 @@ void Game::load()
 	/*Actor* crosshairActor = new Actor();
 	crosshairActor->setScale(2.0f);
 	crosshair = new SpriteComponent(crosshairActor, Assets::getTexture("Crosshair"));*/
+
+	testCam->addCollisionToCheck(b->getCollision());
 }
 
 void Game::loop()

@@ -1,6 +1,7 @@
 #pragma once
 #include "CameraComponent.h"
 #include "Vector2.h"
+#include <vector>
 
 class MultiCameraComponent : public CameraComponent
 {
@@ -16,6 +17,8 @@ public:
 	void setTarget(class Actor* targetP);
 	void setPitchClamp(float minPitchP, float maxPitchP);
 
+	void addCollisionToCheck(class CollisionComponent3D* col);
+
 
 private:
 	class Actor* target;
@@ -27,5 +30,10 @@ private:
 	float maxPitch{ 80.0f };
 
 	Vector2 mouseSensitivity{ 0.12f, 0.10f };
+
+	std::vector<class CollisionComponent3D*> collisionsToCheck;
+
+	Vector3 targetPos;
+	Vector3 targetMoveVelocity{ Vector3::zero };
 };
 
