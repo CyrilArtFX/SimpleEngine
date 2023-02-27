@@ -31,13 +31,10 @@ void MultiCameraComponent::update(float dt)
 			break;
 		}
 	}
-	std::cout << springArmChecked << "\n";
 	Vector3 camPos = targetPos - (lookDirection * springArmChecked);
 
 	Matrix4 view = Matrix4::createLookAt(camPos, targetPos, Vector3::unitZ);
 	setViewMatrix(view);
-
-	
 }
 
 void MultiCameraComponent::processInput(const InputState& inputState)

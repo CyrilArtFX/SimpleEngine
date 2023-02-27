@@ -1,6 +1,5 @@
 #include "SphereCollisionComponent.h"
 #include "Actor.h"
-#include <iostream>
 
 SphereCollisionComponent::SphereCollisionComponent(Actor* ownerP) : CollisionComponent3D(ownerP)
 {

@@ -1,39 +1,6 @@
-﻿  Actor.cpp
-  Assets.cpp
-D:\GAME3_CROZAT_Cyril\SimpleEngine\SimpleEngine\Assets.cpp(255,33): warning C4244: 'argument' : conversion de 'double' en 'const unsigned __int64', perte possible de données
-D:\GAME3_CROZAT_Cyril\SimpleEngine\SimpleEngine\Assets.cpp(272,168): warning C4267: 'argument' : conversion de 'size_t' en 'unsigned int', perte possible de données
-  CameraComponent.cpp
-  CircleCollisionComponent.cpp
-  CollisionComponent3D.cpp
-  Component.cpp
-  Cube.cpp
-  FPSActor.cpp
-  FPSCameraComponent.cpp
-  FollowActor.cpp
-  FollowCameraComponent.cpp
+﻿  BoxCollisionComponent.cpp
   Game.cpp
-  InputMoveComponent.cpp
-  Main.cpp
-  Matrix4.cpp
-  Mesh.cpp
-  MeshComponent.cpp
-D:\GAME3_CROZAT_Cyril\SimpleEngine\SimpleEngine\MeshComponent.cpp(23,45): warning C4267: 'argument' : conversion de 'size_t' en 'int', perte possible de données
-  MoveComponent.cpp
   MultiCameraActor.cpp
   MultiCameraComponent.cpp
   Génération de code en cours...
-  Compilation en cours...
-  Plane.cpp
-  Player.cpp
-  Quaternion.cpp
-  RendererOGL.cpp
-  Shader.cpp
-  Sphere.cpp
-  SphereCollisionComponent.cpp
-D:\GAME3_CROZAT_Cyril\SimpleEngine\SimpleEngine\SphereCollisionComponent.cpp(62,45): warning C4244: '=' : conversion de 'double' en 'float', perte possible de données
-D:\GAME3_CROZAT_Cyril\SimpleEngine\SimpleEngine\SphereCollisionComponent.cpp(64,17): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
-  SpriteComponent.cpp
-  Texture.cpp
-  Vector3.cpp
-  Génération de code en cours...
-  SimpleEngine.vcxproj -> D:\GAME3_CROZAT_Cyril\SimpleEngine\x64\Debug\SimpleEngine.exe
+  SimpleEngine.vcxproj -> E:\Exercices Prog\SimpleEngine\x64\Debug\SimpleEngine.exe
