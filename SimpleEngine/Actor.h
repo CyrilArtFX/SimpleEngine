@@ -52,6 +52,11 @@ public:
 
 	void logWorldTransformMatrix();
 
+	/*
+	* Transform a point from world space to this actor local space
+	*/
+	Vector3 inverseTransformPoint(Vector3 point);
+
 private:
 	Game& game;
 	ActorState state{ ActorState::Active };

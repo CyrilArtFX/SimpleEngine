@@ -12,6 +12,7 @@ MultiCameraActor::MultiCameraActor() : Actor()
 	meshComponent = new MeshComponent(this);
 	meshComponent->setMesh(Assets::getMesh("Mesh_RacingCar"));
 	setPosition(Vector3{ -800.0f, 0.0f, -100.0f });
+	cameraComponent->setFirstPersonOffset(Vector3{ -50.0f, -20.0f, 150.0f });
 }
 
 void MultiCameraActor::actorInput(const InputState& inputState)
@@ -38,6 +39,11 @@ void MultiCameraActor::actorInput(const InputState& inputState)
 
 	moveComponent->setForwardSpeed(forwardSpeed);
 	moveComponent->setAngularSpeed(angularSpeed);
+}
+
+void MultiCameraActor::setCinematicPos(Vector3 cinematicPosP)
+{
+	cameraComponent->setCinematicPos(cinematicPosP);
 }
 
 void MultiCameraActor::addCollisionToCheck(CollisionComponent3D* col)

@@ -1,6 +1,2 @@
-﻿  BoxCollisionComponent.cpp
-  Game.cpp
-  MultiCameraActor.cpp
-  MultiCameraComponent.cpp
-  Génération de code en cours...
+﻿  Actor.cpp
   SimpleEngine.vcxproj -> E:\Exercices Prog\SimpleEngine\x64\Debug\SimpleEngine.exe

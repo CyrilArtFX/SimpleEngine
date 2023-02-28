@@ -3,6 +3,13 @@
 #include "Vector2.h"
 #include <vector>
 
+enum CameraType
+{
+	ThirdPerson,
+	FirstPerson,
+	Cinematic
+};
+
 class MultiCameraComponent : public CameraComponent
 {
 public:
@@ -16,6 +23,8 @@ public:
 
 	void setTarget(class Actor* targetP);
 	void setPitchClamp(float minPitchP, float maxPitchP);
+	void setCinematicPos(Vector3 cinematicPosP);
+	void setFirstPersonOffset(Vector3 firstPersonOffsetP);
 
 	void addCollisionToCheck(class CollisionComponent3D* col);
 
@@ -28,6 +37,11 @@ private:
 
 	float minPitch{ -35.0f };
 	float maxPitch{ 80.0f };
+
+	Vector3 cinematicPos{ Vector3::zero };
+	Vector3 firstPersonOffset{ Vector3::zero };
+
+	CameraType type{ ThirdPerson };
 
 	Vector2 mouseSensitivity{ 0.12f, 0.10f };
 

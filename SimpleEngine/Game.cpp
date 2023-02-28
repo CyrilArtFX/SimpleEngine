@@ -129,6 +129,7 @@ void Game::load()
 
 	testCam->addCollisionToCheck(b->getCollision());
 	testCam->addCollisionToCheck(a->getCollision());
+	testCam->setCinematicPos(Vector3{ 500.0f, 500.0f, 500.0f });
 }
 
 void Game::loop()

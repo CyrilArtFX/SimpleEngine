@@ -123,6 +123,17 @@ void Actor::logWorldTransformMatrix()
 	Log::info("World Transformation Matrix of actor\n" + worldTransform.toString());
 }
 
+Vector3 Actor::inverseTransformPoint(Vector3 point)
+{
+	Matrix4 pointMat = Matrix4::createTranslation(point);
+	Matrix4 inverseWorldTransform = worldTransform;
+	//inverseWorldTransform.invert();
+	Matrix4 transformedPointMat = pointMat * inverseWorldTransform;
+	return transformedPointMat.getTranslation();
+
+	//  don't know why but this is the only way I get something not horrible
+}
+
 void Actor::computeWorldTransform()
 {
 	if (mustRecomputeWorldTransform)
