@@ -2,7 +2,6 @@
 #include "InputSystem.h"
 #include "Actor.h"
 #include "CollisionComponent3D.h"
-#include <iostream>
 
 MultiCameraComponent::MultiCameraComponent(class Actor* ownerP, class Actor* targetP) : CameraComponent(ownerP), target(targetP)
 {
@@ -44,7 +43,7 @@ void MultiCameraComponent::update(float dt)
 
 		if (type == FirstPerson)
 		{
-			camPos = target->inverseTransformPoint(firstPersonOffset);
+			camPos = target->transformPoint(firstPersonOffset);
 			viewTarget = camPos + (lookDirection * 100.0f);
 		}
 	}

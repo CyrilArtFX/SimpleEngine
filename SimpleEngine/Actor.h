@@ -53,9 +53,9 @@ public:
 	void logWorldTransformMatrix();
 
 	/*
-	* Transform a point from world space to this actor local space
+	* Transform a point from this actor local space to world space
 	*/
-	Vector3 inverseTransformPoint(Vector3 point);
+	Vector3 transformPoint(Vector3 point);
 
 private:
 	Game& game;
