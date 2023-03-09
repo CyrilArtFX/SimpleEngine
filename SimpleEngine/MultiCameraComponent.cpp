@@ -34,6 +34,9 @@ void MultiCameraComponent::update(float dt)
 				if (iter->intersectWithRay(targetPos, -lookDirection, springArmLength, t))
 				{
 					springArmChecked = t;
+
+					notify(SPRING_ARM_USED);
+
 					break;
 				}
 			}
@@ -73,6 +76,8 @@ void MultiCameraComponent::processInput(const InputState& inputState)
 	else if (inputState.keyboard.getKeyState(SDL_SCANCODE_3) == ButtonState::Pressed)
 	{
 		type = Cinematic;
+
+		notify(CINEMATIC_CAMERA);
 	}
 
 	if (type == ThirdPerson || type == FirstPerson)

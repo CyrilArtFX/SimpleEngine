@@ -1,6 +1,7 @@
 #pragma once
 #include "CameraComponent.h"
 #include "Vector2.h"
+#include "Subject.h"
 #include <vector>
 
 enum CameraType
@@ -10,7 +11,7 @@ enum CameraType
 	Cinematic
 };
 
-class MultiCameraComponent : public CameraComponent
+class MultiCameraComponent : public CameraComponent, public Subject
 {
 public:
 	MultiCameraComponent(class Actor* ownerP, class Actor* targetP);

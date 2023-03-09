@@ -41,6 +41,14 @@ void MultiCameraActor::actorInput(const InputState& inputState)
 	moveComponent->setAngularSpeed(angularSpeed);
 }
 
+void MultiCameraActor::updateActor(float dt)
+{
+	if (getPosition().lengthSq() > farFromHomeDist * farFromHomeDist)
+	{
+		notify(FAR_FROM_HOME);
+	}
+}
+
 void MultiCameraActor::setCinematicPos(Vector3 cinematicPosP)
 {
 	cameraComponent->setCinematicPos(cinematicPosP);
@@ -49,4 +57,10 @@ void MultiCameraActor::setCinematicPos(Vector3 cinematicPosP)
 void MultiCameraActor::addCollisionToCheck(CollisionComponent3D* col)
 {
 	cameraComponent->addCollisionToCheck(col);
+}
+
+void MultiCameraActor::addObserverToThisActor(IObserver* observer)
+{
+	addObserver(observer);
+	cameraComponent->addObserver(observer);
 }

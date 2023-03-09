@@ -8,6 +8,7 @@
 #include "FPSActor.h"
 #include "FollowActor.h"
 #include "MultiCameraActor.h"
+#include "Achievements.h"
 
 bool Game::initialize()
 {
@@ -130,6 +131,9 @@ void Game::load()
 	testCam->addCollisionToCheck(b->getCollision());
 	testCam->addCollisionToCheck(a->getCollision());
 	testCam->setCinematicPos(Vector3{ 500.0f, 500.0f, 500.0f });
+
+	auto achievements = new Achievements();
+	testCam->addObserverToThisActor(achievements);
 }
 
 void Game::loop()
